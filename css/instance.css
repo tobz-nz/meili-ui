@@ -1,0 +1,40 @@
+@layer components.instance {
+	instance-details {
+		display: flex;
+		gap: 1rem;
+		min-height: 1lh;
+		align-items: center;
+	}
+
+	instance-indexes {
+		display: block;
+
+		>:after {
+			content: '(' attr(documents) ')';
+			font-size: var(--font-size-0);
+			color: var(--gray-6);
+		}
+	}
+
+	index-item {
+		display: block;
+		padding: var(--size-2) var(--size-3);
+
+		width: 100%;
+
+		text-overflow: ellipsis;
+		white-space: nowrap;
+		line-clamp: 1;
+		overflow: hidden;
+
+		cursor: pointer;
+
+		&:hover {
+			color: var(--pink-4);
+		}
+
+		&[selected] {
+			color: var(--pink-6);
+		}
+	}
+}

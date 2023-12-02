@@ -1,0 +1,59 @@
+@layer layout {
+	body {
+		margin: 0;
+
+		display: grid;
+		grid-template-columns: fit-content(340px) 1fr;
+		grid-template-rows: min-content auto;
+		grid-template-areas: "header header" "sidebar content";
+
+		gap: 0 var(--size-3);
+
+		height: 100vh;
+
+		font: var(--font-mono);
+		font-weight: var(--font-weight-3);
+	}
+
+	body > header {
+		grid-area: header;
+
+		display: flex;
+		padding: var(--size-3);
+
+		gap: var(--size-3);
+		justify-content: space-between;
+	}
+
+	nav {
+		grid-area: sidebar;
+
+		max-width: max-content;
+		min-width: 170px;
+		width: 200px;
+
+		overflow: auto;
+		resize: horizontal;
+
+		header {
+			padding-inline: var(--size-3);
+		}
+	}
+
+	main {
+		grid-area: content;
+
+		display: grid;
+		padding-right: var(--size-3);
+		gap: var(--size-3);
+
+		overflow: auto;
+	}
+
+	/*:not(:defined) {
+		display: block;
+		margin-bottom: 1ch;
+		min-height: 1lh;
+		background: hotpink;
+	}*/
+}

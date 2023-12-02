@@ -1,0 +1,12 @@
+@import url('https://unpkg.com/open-props@1.6.13/normalize.min.css') layer(framework);
+@import url('https://unpkg.com/open-props@1.6.13/fonts.min.css') layer(framework);
+@import url('https://unpkg.com/open-props@1.6.13/colors.min.css') layer(framework);
+@import url('https://unpkg.com/open-props@1.6.13/sizes.min.css') layer(framework);
+@import url('https://unpkg.com/open-props@1.6.13/borders.min.css') layer(framework);
+@import url('https://unpkg.com/open-props@1.6.13/shadows.min.css') layer(framework);
+
+@layer utilities {
+	.pointer {
+		cursor: pointer;
+	}
+}

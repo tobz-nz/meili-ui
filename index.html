@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Fancy Meilisearch UI</title>
+	<link rel="icon" href="/images/logo.svg">
+
+	<style>@layer reset, framework, layout, components, utilities</style>
+	<link rel="stylesheet" href="/css/framework.css">
+	<link rel="stylesheet" href="/css/layout.css">
+	<!-- <link rel="stylesheet" href="/css/utilities.css"> -->
+	<link rel="stylesheet" href="/css/instance.css">
+	<link rel="stylesheet" href="/css/search.css">
+
+	<script type="importmap">
+		{
+			"imports": {
+				"WebComponent": "https://unpkg.com/web-component-base@latest/WebComponent.min.js",
+				"FileSize": "https://cdn.filesizejs.com/filesize.min.js"
+			}
+		}
+	</script>
+
+	<script src='https://cdn.jsdelivr.net/npm/meilisearch@latest/dist/bundles/meilisearch.umd.js'></script>
+	<script type="module">
+	  	window.client = new MeiliSearch({
+			host: window.localStorage.getItem('instanceHost'),
+			apiKey: window.localStorage.getItem('instanceKey')
+	  	})
+
+		document.querySelector('instance-indexes').addEventListener('change', event => {
+			// update search-form's selected index
+			document.querySelector('search-form').setAttribute('index', event.detail.index)
+			document.querySelector('#query')?.focus()
+		})
+
+		document.querySelector('instance-indexes').addEventListener('load', event => {
+			// select first index on page load
+			event.target.querySelector('index-item')?.dispatchEvent(new CustomEvent('click', {bubbles: true}))
+		})
+	</script>
+
+	<script async src="/js/instance-settings.js" type="module"></script>
+	<script async src="/js/instance-name.js" type="module"></script>
+	<script async src="/js/instance-host.js" type="module"></script>
+	<script async src="/js/instance-size.js" type="module"></script>
+	<script async src="/js/instance-status.js" type="module"></script>
+	<script async src="/js/instance-version.js" type="module"></script>
+	<script async src="/js/instance-indexes.js" type="module"></script>
+	<script async src="/js/search-form.js" type="module"></script>
+	<script async src="/js/search-results.js" type="module"></script>
+	<script async src="/js/input-field.js" type="module"></script>
+	<script async src="/js/svg-icon.js" type="module"></script>
+</head>
+<body>
+	<header>
+		<img width="52" height="30" src="/images/logo.svg" alt="">
+		<instance-details>
+			<instance-name></instance-name>
+			<instance-host></instance-host>
+			<instance-size></instance-size>
+			<instance-version></instance-version>
+			<instance-status></instance-status>
+			<svg-icon class="pointer" width="20" height="20" icon="settings" onclick="document.getElementById('instance-settings-dialog').showModal()"></svg-icon>
+		</instance-details>
+	</header>
+
+	<nav>
+		<header>
+			<h2>Indexes</h2>
+			<!-- <button id="add-index" aria-label="Create Index">&plus;</button> -->
+		</header>
+		<instance-indexes></instance-indexes>
+	</nav>
+
+	<main>
+		<search-form input="#query" on="input focus">
+			<section>
+				<input id="query" name="query" type="search" autocomplete="off" placeholder="search">
+			</section>
+			<search-results></search-results>
+		</search-form>
+	</main>
+
+	<dialog id="index-settings-dialog">
+		<header>Index Settings</header>
+		<form id="index-settings" method="dialog">
+			<button>Confirm</button>
+		</form>
+	</dialog>
+
+	<dialog id="instance-settings-dialog">
+		<header>Instance Settings</header>
+		<instance-settings>
+			<input name="name" type="text" placeholder="Default" autocomplete="off" required>
+			<input name="host" type="url" placeholder="http://localhost:7700" required>
+			<input name="key" type="text" placeholder="Empty API Key">
+			<button>Confirm</button>
+		</instance-settings>
+	</dialog>
+</body>
+</html>
