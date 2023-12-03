@@ -19,7 +19,11 @@ customElements.define('search-form', class extends WebComponent {
 
 				client
 				.index(this.getAttribute('index'))
-				.search(this.searchInput.value)
+				.search(this.searchInput.value, {
+					attributesToHighlight: ['*'],
+					highlightPreTag: '<mark>',
+					highlightPostTag: '</mark>',
+				})
 				.then(r => r)
 				.then(response => {
 					this.querySelector('search-results')?.setResult(response)

@@ -38,7 +38,7 @@
 
 	search-results {
 		display: grid;
-
+		grid-template-rows: max-content;
 		gap: var(--size-3);
 		align-items: start;
 
