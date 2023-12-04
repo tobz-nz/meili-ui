@@ -1,4 +1,5 @@
 import { WebComponent } from 'WebComponent'
+import client from './meilisearch-client.js'
 
 customElements.define('search-form', class extends WebComponent {
 	static properties = ['index', 'input', 'on']
@@ -10,8 +11,7 @@ customElements.define('search-form', class extends WebComponent {
 			this.searchInput.toggleAttribute('disabled', false)
 		}
 
-
-		if (this.searchInput && client) {
+		if (this.searchInput) {
 			let searchHandler = event => {
 				if (!this.props.index) {
 					throw new Error('No Index Selected')
@@ -21,12 +21,16 @@ customElements.define('search-form', class extends WebComponent {
 				.index(this.getAttribute('index'))
 				.search(this.searchInput.value, {
 					attributesToHighlight: ['*'],
+					facets: ['*'],
 					highlightPreTag: '<mark>',
 					highlightPostTag: '</mark>',
 				})
 				.then(r => r)
 				.then(response => {
 					this.querySelector('search-results')?.setResult(response)
+				})
+				.catch(e => {
+					console.error(e)
 				})
 			}
 

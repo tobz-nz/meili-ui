@@ -1,4 +1,5 @@
 import { WebComponent } from 'WebComponent'
+import client from './meilisearch-client.js'
 
 customElements.define('search-results', class extends WebComponent {
 	static properties = []

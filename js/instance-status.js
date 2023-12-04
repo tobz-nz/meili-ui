@@ -1,4 +1,5 @@
 import { WebComponent } from 'WebComponent'
+import client from './meilisearch-client.js'
 
 customElements.define('instance-status', class extends WebComponent {
 	static properties = ['status', 'isHealthy']

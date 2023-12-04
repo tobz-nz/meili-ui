@@ -1,5 +1,14 @@
-customElements.define('instance-settings', class extends HTMLElement {
-	connectedCallback() {
+import { WebComponent } from 'WebComponent'
+import { MeiliSearch } from "MeiliSearch"
+
+customElements.define('instance-settings', class extends WebComponent {
+	static properties = ['errorMessage']
+
+	onInit() {
+		// this.onInit();
+		// this.render();
+		// this.afterViewInit();
+		
 		let nameInput = this.querySelector('[name="name"'),
 			hostInput = this.querySelector('[name="host"'),
 			keyInput = this.querySelector('[name="key"'),
@@ -11,18 +20,35 @@ customElements.define('instance-settings', class extends HTMLElement {
 			keyInput.value = window.localStorage.getItem('instanceKey')
 
 			if (!nameInput.value || !hostInput.value) {
-				this.closest('dialog').openModal()
+				this.closest('dialog')?.showModal()
 			}
 
-			button.addEventListener('click', event => {
-				if (nameInput.reportValidity() && hostInput.reportValidity() && keyInput.reportValidity()) {
+			this.addEventListener('click', event => {
+				console.log('asd', event.target);
+				if (event.target == button && nameInput.reportValidity() && hostInput.reportValidity() && keyInput.reportValidity()) {
 					window.localStorage.setItem('instanceName', nameInput.value)
 					window.localStorage.setItem('instanceHost', hostInput.value)
 					window.localStorage.setItem('instanceKey', keyInput.value)
 
-					this.closest('dialog').close()
+					let client = new MeiliSearch({
+						host: window.localStorage.getItem('instanceHost'),
+						apiKey: window.localStorage.getItem('instanceKey')
+					})
+
+					client.getIndexes()
+						.then(indexes => {
+							this.closest('dialog').close()
+							window.location.reload()
+						})
+						.catch(e => {
+							console.log(this);
+							this.props.errorMessage = e.message
+						})
 				}
 			})
 		}
 	}
+	
+	// afterViewInit() {}
+	render() {}
 })
