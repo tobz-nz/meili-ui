@@ -1,90 +1,94 @@
 @layer components.instance {
-	#instance-settings-dialog {
-		header {
-			margin-bottom: var(--size-3);
-			font-size: var(--font-size-4);
-		}
+    #instance-settings-dialog {
+        header {
+            margin-bottom: var(--size-3);
+            font-size: var(--font-size-4);
+        }
 
-		button {
-			padding: var(--size-1) var(--size-3);
-			border-radius: var(--size-1);
-		}
-	}
+        button {
+            padding: var(--size-1) var(--size-3);
+            border-radius: var(--size-1);
+        }
+    }
 
-	instance-settings {
-		display: grid;
-		gap: var(--size-2);
-		justify-items: center;
+    instance-settings {
+        display: grid;
+        gap: var(--size-2);
+        justify-items: center;
 
-		&[error-message]:before {
-			content: attr(error-message);
-			background: var(--red-4);
-		}
-	}
+        &[error-message]:before {
+            content: attr(error-message);
+            background: var(--red-4);
+        }
+    }
 
-	instance-status {
-		display: flex;
-		gap: var(--size-1);
-		align-items: center;
-		
-		&:before {
-			content: '';
-			display: inline-block; 
-			width: 1ch;
-			height: 1ch;
-			border-radius: 50%;
-			background: var(--gray-6);
-		}
+    instance-status {
+        display: flex;
+        gap: var(--size-1);
+        align-items: center;
 
-		&[healthy]:before {
-			background: var(--green-6);
-		}
-	}
+        &:before {
+            content: "";
+            display: inline-block;
+            width: 1ch;
+            height: 1ch;
+            border-radius: 50%;
+            background: var(--gray-6);
+        }
 
-	instance-host {
-		text-transform: lowercase;
-	}
-	
-	instance-details {
-		display: flex;
-		gap: 1rem;
-		padding-inline: var(--size-2);
-		min-height: 1lh;
-		align-items: center;
-		
-		font-size: var(--font-size-0);
-		text-transform: capitalize;
-	}
+        &[healthy]:before {
+            background: var(--green-6);
+        }
+    }
 
-	instance-indexes {
-		display: block;
+    instance-host {
+        text-transform: lowercase;
+    }
 
-		> :after {
-			content: '(' attr(documents) ')';
-			font-size: var(--font-size-0);
-			color: var(--gray-6);
-		}
-	}
+    instance-details {
+        display: flex;
+        gap: 1rem;
+        padding-inline: var(--size-2);
+        min-height: 1lh;
+        align-items: center;
 
-	index-item {
-		display: block;
-		padding: var(--size-2) var(--size-3);
+        font-size: var(--font-size-0);
+        text-transform: capitalize;
+    }
 
-		width: 100%;
+    instance-indexes {
+        display: block;
 
-		text-overflow: ellipsis;
-		white-space: nowrap;
-		line-clamp: 1;
-		overflow: hidden;
+        > :after {
+            content: "(" attr(documents) ")";
+            font-size: var(--font-size-0);
+            color: var(--gray-6);
+        }
+    }
 
-		cursor: pointer;
+    index-item {
+        display: block;
+        padding: var(--size-2) var(--size-3);
 
-		&:hover {
-			color: var(--pink-4);
-		}
+        width: 100%;
 
-		&[selected] {
-			color: var(--pink-6);
-		}
-	}
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        line-clamp: 1;
+        overflow: hidden;
+
+        cursor: pointer;
+
+        &:hover {
+            color: var(--pink-4);
+        }
+
+        &[selected] {
+            color: var(--pink-6);
+        }
+
+        &[is-indexing] {
+            outline: 1px solid var(--green-6);
+        }
+    }
 }
