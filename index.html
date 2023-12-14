@@ -94,10 +94,11 @@
         <main>
             <search-form input="#query" on="input focus">
                 <section>
-                    <input id="query" name="query" type="search" autocomplete="off" placeholder="search" />
+                    <input id="query" name="query" type="search" autocomplete="off" placeholder="search" required />
                     <result-stats>
-                        <search-time id="processing-time"></search-time>
-                        <total-hits></total-hits>
+                        <label for="strategy"><input type="checkbox" id="strategy" name="strategy" value="all" title="Search Strategy: All" /> Search Strategy: All</label>
+                        <search-time id="processing-time">0ms</search-time>
+                        <total-hits>0 Hits</total-hits>
                     </result-stats>
                 </section>
                 <search-results>Loading...</search-results>

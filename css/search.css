@@ -23,7 +23,27 @@
         }
     }
 
-    input {
+    label:has(input[type="checkbox"]) {
+        margin-inline-end: auto;
+        display: flex;
+        align-items: center;
+        gap: var(--size-2);
+        font-size: var(--font-size-0);
+
+        input {
+            color: white;
+        }
+    }
+
+    input[type="search"]:invalid + input[name="checkbox"] {
+        right: 20px;
+    }
+
+    input[type="search"]:valid + input[name="checkbox"] {
+        right: 50px;
+    }
+
+    input[type="search"] {
         display: block;
         margin: 0 var(--size-2) var(--size-2);
 
@@ -64,12 +84,32 @@
         overflow: auto;
 
         article {
+            max-height: 35vh;
+            overflow: hidden;
+
+            scroll-margin-top: var(--size-2);
+            /* overscroll-behavior: ; */
+
             font-weight: var(--font-weight-2);
 
             border: 1px solid var(--gray-2);
             border-radius: var(--radius-2);
             background: white;
             box-shadow: var(--shadow-2);
+
+            transition:
+                max-height 300ms ease,
+                box-shadow 250ms ease;
+
+            &:hover {
+                box-shadow: var(--shadow-3);
+            }
+
+            &:is(:focus, :focus-visible, :focus-within) {
+                overflow: auto;
+                outline-offset: 5px;
+                outline: 1px auto;
+            }
 
             @media (prefers-color-scheme: dark) {
                 border-color: var(--gray-7);
