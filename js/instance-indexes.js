@@ -4,7 +4,9 @@ import client from "./meilisearch-client.js";
 customElements.define(
     "instance-indexes",
     class extends WebComponent {
-        static properties = ["selected"];
+        static props = {
+            selected: ''
+        };
 
         indexes = [];
 
@@ -29,7 +31,7 @@ customElements.define(
                                 });
 
                                 this.render();
-                                console.log("indexes loaded");
+                                // console.log("indexes loaded");
                                 this.dispatchEvent(new CustomEvent("load"));
                             });
                     });

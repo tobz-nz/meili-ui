@@ -4,10 +4,15 @@ import client from "./meilisearch-client.js";
 customElements.define(
     "search-form",
     class extends WebComponent {
-        static properties = ["index", "input", "on"];
+        static props = {
+            index: '',
+            input: '',
+            on: ''
+        };
 
         afterViewInit() {
             this.searchInput = this.querySelector(`${this.props.input}`);
+            this.strategyInput = this.querySelector('[name="strategy"]');
 
             if (!this.props.index) {
                 this.searchInput.toggleAttribute("disabled", false);
@@ -15,6 +20,8 @@ customElements.define(
 
             if (this.searchInput) {
                 let searchHandler = (event) => {
+                    this.searchInput.checkValidity();
+
                     if (!this.props.index) {
                         throw new Error("No Index Selected");
                     }
@@ -22,7 +29,7 @@ customElements.define(
                     client
                         .index(this.getAttribute("index"))
                         .search(this.searchInput.value, {
-                            matchingStrategy: this.getAttribute("matchingStrategy") || "last",
+                            matchingStrategy: this.strategyInput.checked ? "all" : "last",
                             attributesToHighlight: ["*"],
                             facets: ["*"],
                             highlightPreTag: "<mark>",
@@ -41,9 +48,11 @@ customElements.define(
                 eventTriggers.forEach((trigger) => {
                     this.searchInput.addEventListener(trigger, searchHandler);
                 });
+
+                this.strategyInput.addEventListener("change", searchHandler);
             }
         }
 
-        render() {}
+        render() { }
     },
 );

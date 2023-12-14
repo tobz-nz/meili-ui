@@ -4,12 +4,12 @@ import client from "./meilisearch-client.js";
 customElements.define(
     "index-facets",
     class extends WebComponent {
-        static properties = ["index"];
+        static props = { index: '' };
 
         facets = [];
 
         afterViewInit() {
-            this.addEventListener("click", (event) => {});
+            this.addEventListener("click", (event) => { });
         }
 
         onChanges(changes) {

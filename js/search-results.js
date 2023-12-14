@@ -4,7 +4,7 @@ import client from "./meilisearch-client.js";
 customElements.define(
     "search-results",
     class extends WebComponent {
-        static properties = [];
+        static props = {};
 
         results = [];
 
@@ -20,7 +20,7 @@ customElements.define(
                 this.results.hits.forEach((hit) => {
                     // console.log(hit)
 
-                    let article = "<article><dl>";
+                    let article = '<article tabindex="0"><dl>';
                     Object.keys(hit)
                         .filter((prop) => {
                             // filter out meta data
@@ -33,6 +33,15 @@ customElements.define(
 
                             let pre = "",
                                 post = "";
+
+                            if (prop === "loader") {
+                                console.log(hit[prop], JSON.stringify(hit[prop], null, 2));
+                            }
+
+                            if (typeof hit[prop] === "object" && hit[prop] !== null) {
+                                hit[prop] = JSON.stringify(hit[prop], null, 2);
+                            }
+
                             if (typeof hit[prop] !== "string") {
                                 pre = `<code class="${hit[prop] === null ? "null" : typeof hit[prop]}">`;
                                 post = `</code>`;
