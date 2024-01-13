@@ -1,11 +1,10 @@
 import { WebComponent } from 'WebComponent'
-import client from './meilisearch-client.js'
 
 customElements.define('instance-version', class extends WebComponent {
     static props = { version: '0.0.0' }
 
-    onInit() {
-        client.getVersion()
+    afterViewInit() {
+        this.closest('meili-instance')?.client.getVersion()
             .then(r => this.props.version = r.pkgVersion)
             .catch(e => {
                 this.props.version = '0.0.0'

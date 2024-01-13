@@ -1,5 +1,4 @@
 import { WebComponent } from "WebComponent";
-import client from "./meilisearch-client.js";
 
 customElements.define(
     "search-results",

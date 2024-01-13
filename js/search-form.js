@@ -1,5 +1,4 @@
 import { WebComponent } from "WebComponent";
-import client from "./meilisearch-client.js";
 
 customElements.define(
     "search-form",
@@ -26,7 +25,7 @@ customElements.define(
                         throw new Error("No Index Selected");
                     }
 
-                    client
+                    this.closest('meili-instance')?.client
                         .index(this.getAttribute("index"))
                         .search(this.searchInput.value, {
                             matchingStrategy: this.strategyInput.checked ? "all" : "last",

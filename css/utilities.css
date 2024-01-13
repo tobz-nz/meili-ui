@@ -1,4 +1,20 @@
 @layer utilities {
+    .flex {
+        display: flex;
+    }
+
+    .items-center {
+        align-items: center;
+    }
+
+    .gap-1 {
+        gap: var(--size-1);
+    }
+
+    .mb-4 {
+        margin-bottom: var(--size-4);
+    }
+
 	.pointer {
 		cursor: pointer;
 	}

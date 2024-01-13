@@ -1,5 +1,4 @@
 import { WebComponent } from "WebComponent";
-import client from "./meilisearch-client.js";
 
 customElements.define(
     "instance-indexes",
@@ -11,31 +10,30 @@ customElements.define(
         indexes = [];
 
         afterViewInit() {
-            if (client) {
-                // get list of indexes
-                client
-                    .getIndexes()
-                    .then((r) => r.results)
-                    .then((indexes) => {
-                        this.indexes = indexes;
+            this.client = this.closest('meili-instance').client
 
-                        // then get index stats and merge the numberOfDocuments
-                        client
-                            .getStats()
-                            .then((r) => r.indexes)
-                            .then((indexStats) => {
-                                Object.keys(indexStats).forEach((indexName) => {
-                                    let indexNumber = this.indexes.findIndex((index) => index.uid == indexName);
-                                    this.indexes[indexNumber].numberOfDocuments = indexStats[indexName].numberOfDocuments;
-                                    this.indexes[indexNumber].isIndexing = indexStats[indexName].isIndexing;
-                                });
+            // get list of indexes
+            this.client?.getIndexes()
+                .then((r) => r.results)
+                .then((indexes) => {
+                    this.indexes = indexes;
 
-                                this.render();
-                                // console.log("indexes loaded");
-                                this.dispatchEvent(new CustomEvent("load"));
+                    // then get index stats and merge the numberOfDocuments
+                    this.client
+                        .getStats()
+                        .then((r) => r.indexes)
+                        .then((indexStats) => {
+                            Object.keys(indexStats).forEach((indexName) => {
+                                let indexNumber = this.indexes.findIndex((index) => index.uid == indexName);
+                                this.indexes[indexNumber].numberOfDocuments = indexStats[indexName].numberOfDocuments;
+                                this.indexes[indexNumber].isIndexing = indexStats[indexName].isIndexing;
                             });
-                    });
-            }
+
+                            this.render();
+                            // console.log("indexes loaded");
+                            this.dispatchEvent(new CustomEvent("load"));
+                        });
+                });
 
             this.addEventListener("click", (event) => {
                 this.props.selected = event.target.textContent;
@@ -50,7 +48,7 @@ customElements.define(
             });
 
             setInterval(() => {
-                client
+                this.client
                     .getStats()
                     .then((r) => r.indexes)
                     .then((indexStats) => {

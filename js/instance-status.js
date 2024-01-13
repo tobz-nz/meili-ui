@@ -1,5 +1,4 @@
 import { WebComponent } from "WebComponent";
-import client from "./meilisearch-client.js";
 
 customElements.define(
     "instance-status",
@@ -21,7 +20,7 @@ customElements.define(
         }
 
         update() {
-            client.health().then((r) => {
+            this.closest('meili-instance')?.client.health().then((r) => {
                 this.setAttribute("status", r.status);
                 this.toggleAttribute("healthy", this.props.status === "available");
             });

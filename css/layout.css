@@ -1,5 +1,5 @@
 @layer layout {
-	body {
+	meili-instance {
 		margin: 0;
 
 		display: grid;
@@ -15,7 +15,7 @@
 		font-weight: var(--font-weight-3);
 	}
 
-	body > header {
+	meili-instance > header {
 		grid-area: header;
 
 		display: flex;

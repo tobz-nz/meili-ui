@@ -1,5 +1,4 @@
 import { WebComponent } from "WebComponent";
-import client from "./meilisearch-client.js";
 
 customElements.define(
     "index-facets",
@@ -14,7 +13,7 @@ customElements.define(
 
         onChanges(changes) {
             if (changes.property == "index") {
-                client
+                this.closest('meili-instance').client
                     .index(this.props.index)
                     .getFilterableAttributes()
                     .then((facets) => {

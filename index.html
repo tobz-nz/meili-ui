@@ -24,17 +24,18 @@
             }
         </script>
 
-        <script async src="/js/instance-settings.js" type="module"></script>
-        <script async src="/js/instance-name.js" type="module"></script>
-        <script async src="/js/instance-host.js" type="module"></script>
-        <script async src="/js/instance-size.js" type="module"></script>
-        <script async src="/js/instance-status.js" type="module"></script>
-        <script async src="/js/instance-version.js" type="module"></script>
-        <script async src="/js/instance-indexes.js" type="module"></script>
-        <script async src="/js/index-facets.js" type="module"></script>
-        <script async src="/js/search-form.js" type="module"></script>
-        <script async src="/js/search-results.js" type="module"></script>
-        <script async src="/js/input-field.js" type="module"></script>
+        <script src="/js/meili-instance.js" type="module"></script>
+        <script src="/js/instance-settings.js" type="module"></script>
+        <script src="/js/instance-name.js" type="module"></script>
+        <script src="/js/instance-host.js" type="module"></script>
+        <script src="/js/instance-size.js" type="module"></script>
+        <script src="/js/instance-status.js" type="module"></script>
+        <script src="/js/instance-version.js" type="module"></script>
+        <script src="/js/instance-indexes.js" type="module"></script>
+        <script src="/js/index-facets.js" type="module"></script>
+        <script src="/js/search-form.js" type="module"></script>
+        <script src="/js/search-results.js" type="module"></script>
+        <script src="/js/input-field.js" type="module"></script>
         <script async src="/js/svg-icon.js" type="module"></script>
 
         <script type="module">
@@ -63,67 +64,69 @@
         </script>
     </head>
     <body>
-        <header>
-            <img width="52" height="30" src="/images/logo.svg" alt="" />
-            <instance-details>
-                <instance-name></instance-name>
-                <instance-host></instance-host>
-                <instance-size></instance-size>
-                <instance-version onerror="document.querySelector('#instance-settings-dialog').showModal()"></instance-version>
-                <instance-status></instance-status>
-                <svg-icon
-                    aria-role="button"
-                    title="Open Instance Settings"
-                    class="pointer"
-                    width="20"
-                    height="20"
-                    icon="settings"
-                    onclick="document.getElementById('instance-settings-dialog').showModal()"
-                ></svg-icon>
-            </instance-details>
-        </header>
-
-        <nav>
+        <meili-instance>
             <header>
-                <h2>Indexes</h2>
-                <!-- <button id="add-index" aria-label="Create Index">&plus;</button> -->
+                <h1 class="flex gap-1 items-center font-2">
+                    <img width="52" height="30" src="/images/logo.svg" alt="" /> Meilisearch UI
+                </h1>
+                <instance-details>
+                    <instance-name></instance-name>
+                    <instance-host></instance-host>
+                    <instance-size></instance-size>
+                    <instance-version onerror="document.querySelector('#instance-settings-dialog').showModal()"></instance-version>
+                    <instance-status></instance-status>
+                    <svg-icon
+                        aria-role="button"
+                        title="Open Instance Settings"
+                        class="pointer"
+                        width="20"
+                        height="20"
+                        icon="settings"
+                        onclick="document.getElementById('instance-settings-dialog').showModal()"
+                    ></svg-icon>
+                </instance-details>
             </header>
-            <instance-indexes></instance-indexes>
-        </nav>
+            <nav>
+                <header>
+                    <h2>Indexes</h2>
+                    <!-- <button id="add-index" aria-label="Create Index">&plus;</button> -->
+                </header>
+                <instance-indexes></instance-indexes>
+            </nav>
+            <main>
+                <search-form input="#query" on="input focus">
+                    <section>
+                        <input id="query" name="query" type="search" autocomplete="off" placeholder="search" required />
+                        <result-stats>
+                            <label for="strategy"><input type="checkbox" id="strategy" name="strategy" value="all" title="Search Strategy: All" /> Search Strategy: All</label>
+                            <search-time id="processing-time">0ms</search-time>
+                            <total-hits>0 Hits</total-hits>
+                        </result-stats>
+                    </section>
+                    <search-results>Loading...</search-results>
+                </search-form>
+                <index-details>
+                    <h2></h2>
+                </index-details>
+            </main>
 
-        <main>
-            <search-form input="#query" on="input focus">
-                <section>
-                    <input id="query" name="query" type="search" autocomplete="off" placeholder="search" required />
-                    <result-stats>
-                        <label for="strategy"><input type="checkbox" id="strategy" name="strategy" value="all" title="Search Strategy: All" /> Search Strategy: All</label>
-                        <search-time id="processing-time">0ms</search-time>
-                        <total-hits>0 Hits</total-hits>
-                    </result-stats>
-                </section>
-                <search-results>Loading...</search-results>
-            </search-form>
+            <dialog id="index-settings-dialog">
+                <header>Index Settings</header>
+                <form id="index-settings" method="dialog">
+                    <button>Confirm</button>
+                </form>
+            </dialog>
 
-            <index-details>
-                <h2></h2>
-            </index-details>
-        </main>
+            <dialog id="instance-settings-dialog">
+                <header>Instance Settings</header>
+                <instance-settings>
+                    <input name="name" type="text" placeholder="Default" autocomplete="off" required />
+                    <input name="host" type="url" placeholder="http://localhost:7700" required />
+                    <input name="key" type="text" placeholder="Empty API Key" />
+                    <button>Confirm</button>
+                </instance-settings>
+            </dialog>
 
-        <dialog id="index-settings-dialog">
-            <header>Index Settings</header>
-            <form id="index-settings" method="dialog">
-                <button>Confirm</button>
-            </form>
-        </dialog>
-
-        <dialog id="instance-settings-dialog">
-            <header>Instance Settings</header>
-            <instance-settings>
-                <input name="name" type="text" placeholder="Default" autocomplete="off" required />
-                <input name="host" type="url" placeholder="http://localhost:7700" required />
-                <input name="key" type="text" placeholder="Empty API Key" />
-                <button>Confirm</button>
-            </instance-settings>
-        </dialog>
+        </meili-instance>
     </body>
 </html>

@@ -1,11 +1,10 @@
 import { WebComponent } from 'WebComponent'
-import client from './meilisearch-client.js'
 
 customElements.define('instance-size', class extends WebComponent {
     static props = { size: '0 B' }
 
     onInit() {
-        client.getStats()
+        this.closest('meili-instance')?.client.getStats()
             .then(r => this.props.size = this.humanFileSize(r.databaseSize))
             .catch(e => {
                 this.props.size = '0 B'
