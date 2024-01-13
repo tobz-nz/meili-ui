@@ -67,14 +67,17 @@
     <body>
         <meili-instance>
             <header>
-                <h1 class="flex gap-1 items-center font-2">
-                    <img width="52" height="30" src="/images/logo.svg" alt="" /> Meilisearch UI
-                </h1>
+                <div class="flex gap-2 items-center">
+                    <img width="68" height="40" src="/images/logo.svg" alt="" />
+                    <div class="flex col">
+                        <h1 class="text-3">Meilisearch UI</h1>
+                        <instance-version class="text-0" onerror="document.querySelector('#instance-settings-dialog').showModal()"></instance-version>
+                    </div>
+                </div>
                 <instance-details>
                     <instance-name></instance-name>
                     <instance-host></instance-host>
                     <instance-size></instance-size>
-                    <instance-version onerror="document.querySelector('#instance-settings-dialog').showModal()"></instance-version>
                     <instance-status></instance-status>
                     <svg-icon
                         aria-role="button"
