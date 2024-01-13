@@ -13,6 +13,7 @@
         <link rel="stylesheet" href="/css/utilities.css" />
         <link rel="stylesheet" href="/css/instance.css" />
         <link rel="stylesheet" href="/css/search.css" />
+        <link rel="stylesheet" href="/css/error-message.css" />
 
         <script type="importmap">
             {
@@ -119,6 +120,7 @@
 
             <dialog id="instance-settings-dialog">
                 <header>Instance Settings</header>
+                <error-message class="mb-4"></error-message>
                 <instance-settings>
                     <input name="name" type="text" placeholder="Default" autocomplete="off" required />
                     <input name="host" type="url" placeholder="http://localhost:7700" required />

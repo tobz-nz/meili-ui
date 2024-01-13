@@ -15,11 +15,6 @@
         display: grid;
         gap: var(--size-2);
         justify-items: center;
-
-        &[error-message]:before {
-            content: attr(error-message);
-            background: var(--red-4);
-        }
     }
 
     instance-status {

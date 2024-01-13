@@ -32,8 +32,11 @@ customElements.define('instance-settings', class extends WebComponent {
                             window.location.reload()
                         })
                         .catch(e => {
-                            console.log(this);
-                            this.props.errorMessage = e.message
+                            let errorMessage = this.closest('dialog')?.querySelector('error-message')
+                            console.log(errorMessage);
+                            if (errorMessage) {
+                                errorMessage.innerText = e.message
+                            }
                         })
                 }
             })

@@ -1,0 +1,12 @@
+@layer components {
+    error-message {
+        display: block;
+        padding: 1ch 1.4ch;
+        color: white;
+        background: var(--red-4);
+
+        &:empty {
+            display: none;
+        }
+    }
+}
