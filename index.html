@@ -3,17 +3,17 @@
     <head>
         <meta charset="utf-8" />
         <title>Fancy Meilisearch UI</title>
-        <link rel="icon" href="/images/logo.svg" />
+        <link rel="icon" href="images/logo.svg" />
 
         <style>
             @layer reset, framework, layout, components, utilities;
         </style>
-        <link rel="stylesheet" href="/css/framework.css" />
-        <link rel="stylesheet" href="/css/layout.css" />
-        <link rel="stylesheet" href="/css/utilities.css" />
-        <link rel="stylesheet" href="/css/instance.css" />
-        <link rel="stylesheet" href="/css/search.css" />
-        <link rel="stylesheet" href="/css/error-message.css" />
+        <link rel="stylesheet" href="css/framework.css" />
+        <link rel="stylesheet" href="css/layout.css" />
+        <link rel="stylesheet" href="css/utilities.css" />
+        <link rel="stylesheet" href="css/instance.css" />
+        <link rel="stylesheet" href="css/search.css" />
+        <link rel="stylesheet" href="css/error-message.css" />
 
         <script type="importmap">
             {
@@ -25,19 +25,19 @@
             }
         </script>
 
-        <script src="/js/meili-instance.js" type="module"></script>
-        <script src="/js/instance-settings.js" type="module"></script>
-        <script src="/js/instance-name.js" type="module"></script>
-        <script src="/js/instance-host.js" type="module"></script>
-        <script src="/js/instance-size.js" type="module"></script>
-        <script src="/js/instance-status.js" type="module"></script>
-        <script src="/js/instance-version.js" type="module"></script>
-        <script src="/js/instance-indexes.js" type="module"></script>
-        <script src="/js/index-facets.js" type="module"></script>
-        <script src="/js/search-form.js" type="module"></script>
-        <script src="/js/search-results.js" type="module"></script>
-        <script src="/js/input-field.js" type="module"></script>
-        <script async src="/js/svg-icon.js" type="module"></script>
+        <script src="js/meili-instance.js" type="module"></script>
+        <script src="js/instance-settings.js" type="module"></script>
+        <script src="js/instance-name.js" type="module"></script>
+        <script src="js/instance-host.js" type="module"></script>
+        <script src="js/instance-size.js" type="module"></script>
+        <script src="js/instance-status.js" type="module"></script>
+        <script src="js/instance-version.js" type="module"></script>
+        <script src="js/instance-indexes.js" type="module"></script>
+        <script src="js/index-facets.js" type="module"></script>
+        <script src="js/search-form.js" type="module"></script>
+        <script src="js/search-results.js" type="module"></script>
+        <script src="js/input-field.js" type="module"></script>
+        <script async src="js/svg-icon.js" type="module"></script>
 
         <script type="module">
             document.querySelector("instance-indexes").addEventListener("change", (event) => {
@@ -68,7 +68,7 @@
         <meili-instance>
             <header>
                 <div class="flex gap-2 items-center">
-                    <img width="68" height="40" src="/images/logo.svg" alt="" />
+                    <img width="68" height="40" src="images/logo.svg" alt="" />
                     <div class="flex col">
                         <h1 class="text-3">Meilisearch UI</h1>
                         <instance-version class="text-0" onerror="document.querySelector('#instance-settings-dialog').showModal()"></instance-version>
